@@ -8,7 +8,7 @@ Download the `uiManager.js` file and include it in your project.
 
 ```html
 <script src="path/to/uiManager.js"></script>
-
+```
 ## Usage
 
 Instantiate the `UIManager`:
