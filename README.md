@@ -1,4 +1,3 @@
-```
 # UI Library
 
 A lightweight and customizable UI library for creating dynamic user interfaces in web applications.
@@ -9,7 +8,6 @@ Download the `uiManager.js` file and include it in your project.
 
 ```html
 <script src="path/to/uiManager.js"></script>
-```
 
 ## Usage
 
@@ -96,4 +94,3 @@ Returns the created input element.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-```
