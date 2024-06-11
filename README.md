@@ -1,4 +1,3 @@
-```
 # UI Library
 
 A lightweight and customizable UI library for creating dynamic user interfaces in web applications.
@@ -7,7 +6,7 @@ A lightweight and customizable UI library for creating dynamic user interfaces i
 
 Load the script with tampermonkey
 
-```js
+```javascript
 window.onload = () => {
     fetch('https://raw.githubusercontent.com/Snoofz/web-ui-library/main/ui.js')
         .then(response => response.text())
@@ -76,6 +75,22 @@ let textInputElement = uiManager.addTextInput("Placeholder text?", /* Some value
 textInputElement.value = 'New value';
 ```
 
+### Creating Tab Menus
+
+```javascript
+let tabs = uiManager.createTabMenu([
+    { title: 'Tab 1', content: '<p>This is the content of Tab 1</p>' },
+    { title: 'Tab 2', content: '<p>This is the content of Tab 2</p>' },
+    { title: 'Tab 3', content: '<p>This is the content of Tab 3</p>' }
+]);
+```
+
+### Showing Tab Content
+
+```javascript
+uiManager.showTabContent(0, tabs, contentContainer); // Index 0 is the first tab
+```
+
 ## API
 
 ### `createMenu(elementId, titleText)`
@@ -113,7 +128,22 @@ Adds a text input field to the current menu.
 
 Returns the created input element.
 
+### `createTabMenu(tabs)`
+
+Creates a tab menu with the specified tabs.
+
+- `tabs`: (Array) An array of objects, each containing a title and content for a tab.
+
+Returns the created tabs.
+
+### `showTabContent(index, tabs, contentContainer)`
+
+Shows the content of the tab at the specified index.
+
+- `index`: (Number) The index of the tab to show.
+- `tabs`: (Array) The array of tabs created with `createTabMenu`.
+- `contentContainer`: (HTMLElement) The container where the tab content will be displayed.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-```
