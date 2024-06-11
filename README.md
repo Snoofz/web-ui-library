@@ -1,3 +1,4 @@
+```
 # UI Library
 
 A lightweight and customizable UI library for creating dynamic user interfaces in web applications.
@@ -31,6 +32,7 @@ window.onload = () => {
 };
 
 ```
+
 ## Usage
 
 Instantiate the `UIManager`:
@@ -114,3 +116,4 @@ Returns the created input element.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+```
