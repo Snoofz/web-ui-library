@@ -7,17 +7,30 @@ A lightweight and customizable UI library for creating dynamic user interfaces i
 Load the script with tampermonkey
 
 ```js
-// Create a new script element
-var script = document.createElement('script');
+fetch('https://raw.githubusercontent.com/Snoofz/web-ui-library/main/ui.js')
+    .then(response => response.text())
+    .then(scriptContent => {
+        var script = document.createElement('script');
+        script.textContent = scriptContent;
+        document.head.appendChild(script);
 
-// Set the type attribute
-script.type = 'text/javascript';
+        script.onload = function() {
+            // Your UIManager code here
+            let uiManager = new UIManager();
+            let mainMenu = uiManager.createMenu("epicUI", "My Epic UI Title");
+            uiManager.makeDraggable(mainMenu);
+            uiManager.addButton("Here's a button!", () => {
+                // Button action goes here
+            });
+            uiManager.addLabel("My Awesome Label");
+            let textInputElement = uiManager.addTextInput("Placeholder text?", () => {
+                // Value change action goes here
+            });
 
-// Set the src attribute to the URL of the script
-script.src = 'https://raw.githubusercontent.com/Snoofz/web-ui-library/main/ui.js';
-
-// Append the script element to the head or body of the document
-document.head.appendChild(script);
+            textInputElement.value = 'New value';
+        };
+    })
+    .catch(error => console.error('Error loading script:', error));
 
 ```
 ## Usage
