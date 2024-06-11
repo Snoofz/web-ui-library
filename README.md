@@ -23,9 +23,7 @@ window.onload = () => {
                 // Button action goes here
             });
             uiManager.addLabel("My Awesome Label");
-            let textInputElement = uiManager.addTextInput("Placeholder text?", () => {
-                // Value change action goes here
-            });
+            let textInputElement = uiManager.addTextInput("Placeholder text?", /* Some value here */ 10);
 
             textInputElement.value = 'New value';
         })
@@ -70,9 +68,7 @@ uiManager.addLabel("My Awesome Label");
 ### Adding Text Inputs
 
 ```javascript
-let textInputElement = uiManager.addTextInput("Placeholder text?", () => {
-    // Value change action goes here
-});
+let textInputElement = uiManager.addTextInput("Placeholder text?", /* Some value here */ 10);
 
 // Set or get the value
 textInputElement.value = 'New value';
