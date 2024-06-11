@@ -1,5 +1,7 @@
 # UI Library
 
+![grgrggr-removebg-preview](https://github.com/Snoofz/web-ui-library/assets/165219710/000c5d37-a621-41bb-baec-dcd495fcdbe2)
+
 A lightweight and customizable UI library for creating dynamic user interfaces in web applications.
 
 ## Installation
