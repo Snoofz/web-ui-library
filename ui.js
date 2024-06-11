@@ -103,15 +103,14 @@ class UIManager {
          this.UIContext.appendChild(title);
     }
 
-    addTextInput(placeholderText, valueChangeAction) {
+    addTextInput(placeholderText, value) {
      const tmpInput = document.createElement('input');
         tmpInput.type = 'number';
         tmpInput.placeholder = placeholderText;
         tmpInput.style.width = '100%';
         tmpInput.style.padding = '10px';
         tmpInput.style.marginBottom = '20px';
-        tmpInput.value = openRate;
-        tmpInput.addEventListener('input', valueChangeAction);
+        tmpInput.value = value;
 
         this.UIContext.appendChild(tmpInput);
         return tmpInput;
