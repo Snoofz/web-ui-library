@@ -4,10 +4,21 @@ A lightweight and customizable UI library for creating dynamic user interfaces i
 
 ## Installation
 
-Download the `uiManager.js` file and include it in your project.
+Load the script with tampermonkey
 
-```html
-<script src="path/to/uiManager.js"></script>
+```js
+// Create a new script element
+var script = document.createElement('script');
+
+// Set the type attribute
+script.type = 'text/javascript';
+
+// Set the src attribute to the URL of the script
+script.src = 'https://raw.githubusercontent.com/Snoofz/web-ui-library/main/ui.js';
+
+// Append the script element to the head or body of the document
+document.head.appendChild(script);
+
 ```
 ## Usage
 
