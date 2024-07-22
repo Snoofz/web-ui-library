@@ -81,6 +81,6 @@ const tabs = [
     { title: 'Tab 2', content: 'Content for Tab 2' }
 ];
 const tabMenu = uiManager.createTabMenu(tabs);
-
+```
 ![image](https://github.com/user-attachments/assets/a4a5e4e3-c61d-4e64-9c69-8c0c44bf0f50)
 ![image](https://github.com/user-attachments/assets/38e55684-b845-4efc-9dc9-629f76be76a5)
