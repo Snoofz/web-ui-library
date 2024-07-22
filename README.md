@@ -1,151 +1,83 @@
-# UI Library
+# UIManager and Log Classes
 
-![grgrggr-removebg-preview](https://github.com/Snoofz/web-ui-library/assets/165219710/000c5d37-a621-41bb-baec-dcd495fcdbe2)
+This project includes the `UIManager`, `UITab`, and `Log` classes for creating a dynamic user interface with notifications, draggable menus, tabs, and logging.
 
-A lightweight and customizable UI library for creating dynamic user interfaces in web applications.
+## Classes
 
-## Installation
+### Log
 
-Load the script with tampermonkey
+The `Log` class provides static methods for logging messages to the console with different styles:
 
-```javascript
-window.onload = () => {
-    fetch('https://raw.githubusercontent.com/Snoofz/web-ui-library/main/ui.js')
-        .then(response => response.text())
-        .then(scriptContent => {
-            var script = document.createElement('script');
-            script.textContent = scriptContent;
-            document.head.appendChild(script);
+- `Log.info(message)`: Logs an informational message in blue.
+- `Log.error(message)`: Logs an error message in red.
+- `Log.success(message)`: Logs a success message in green.
 
-            // Execute the UIManager code after the script is appended
-            let uiManager = new UIManager();
-            let mainMenu = uiManager.createMenu("epicUI", "My Epic UI Title");
-            uiManager.makeDraggable(mainMenu);
-            uiManager.addButton("Here's a button!", () => {
-                // Button action goes here
-            });
-            uiManager.addLabel("My Awesome Label");
-            let textInputElement = uiManager.addTextInput("Placeholder text?", /* Some value here */ 10);
+### UIManager
 
-            textInputElement.value = 'New value';
-        })
-        .catch(error => console.error('Error loading script:', error));
-};
+The `UIManager` class manages the user interface, including notifications, menus, tabs, and various UI elements.
 
-```
+#### Constructor
 
-## Usage
+- `constructor()`: Initializes the `UIManager` instance with properties like `UIContext`, `UIMenus`, `tabs`, `notificationStack`, `notificationHeight`, and `notificationMargin`.
 
-Instantiate the `UIManager`:
+#### Methods
 
-```javascript
-let uiManager = new UIManager();
-```
+- `getAllTabs()`: Returns all the tabs.
+- `createNotification(titleText, descriptionText)`: Creates a notification with the given title and description. Notifications are displayed at the bottom left of the screen and disappear after 5 seconds.
+- `calculateNotificationBottom()`: Calculates the bottom position for the next notification based on the existing notifications.
+- `removeNotification(notification)`: Removes a notification from the stack and repositions the remaining notifications.
+- `repositionNotifications()`: Repositions notifications after one has been removed.
+- `createMenu(elementId, titleText, width = '300px', height = 'auto')`: Creates a draggable menu with the specified title, width, and height.
+- `makeDraggable(element)`: Makes an element draggable by its title bar.
+- `addButton(buttonText, buttonAction)`: Adds a button to the current UI context.
+- `addLabel(labelText)`: Adds a label to the current UI context.
+- `addSpacer(height)`: Adds a spacer with the specified height to the current UI context.
+- `addTextInput(placeholderText, valueChangeAction)`: Adds a text input to the current UI context.
+- `addSlider(min, max, step, currentValue, customText, valueChangeAction)`: Adds a slider to the current UI context.
+- `addLogo()`: Adds a logo to the current UI context.
+- `createTabMenu(tabs)`: Creates a tab menu with the specified tabs.
+- `addTabsToTabMenu(existingTabs, newTabs)`: Adds new tabs to an existing tab menu.
+- `showTabContent(index, tabs, contentContainer)`: Shows the content of the specified tab.
 
-### Creating a Menu
+### UITab
 
-```javascript
-let mainMenu = uiManager.createMenu("epicUI", "My Epic UI Title");
-```
+The `UITab` class represents a single tab in a tab menu.
 
-### Making a Menu Draggable
+#### Constructor
 
-```javascript
-uiManager.makeDraggable(mainMenu);
-```
+- `constructor(title, contentContainer, content)`: Initializes the `UITab` instance with the specified title, content container, and content.
 
-### Adding Buttons
+#### Methods
 
-```javascript
-uiManager.addButton("Here's a button!", () => {
-    // Button action goes here
-});
-```
+- `addButton(buttonText, buttonAction)`: Adds a button to the tab's content container.
+- `addLabel(labelText)`: Adds a label to the tab's content container.
+- `addTextInput(placeholderText, valueChangeAction)`: Adds a text input to the tab's content container.
+- `addSpacer(height)`: Adds a spacer with the specified height to the tab's content container.
+- `addSlider(min, max, step, currentValue, customText, valueChangeAction)`: Adds a slider to the tab's content container.
+- `showContent()`: Shows the tab's content, hiding other tabs' content.
 
-### Adding Labels
+## Example Usage
 
 ```javascript
-uiManager.addLabel("My Awesome Label");
-```
+// Create an instance of UIManager
+const uiManager = new UIManager();
 
-### Adding Text Inputs
+// Create a menu
+const menu = uiManager.createMenu('menu1', 'Menu Title');
 
-```javascript
-let textInputElement = uiManager.addTextInput("Placeholder text?", /* Some value here */ 10);
+// Add elements to the menu
+uiManager.addButton('Click Me', () => Log.info('Button clicked!'));
+uiManager.addLabel('This is a label');
+uiManager.addSpacer(20);
+uiManager.addTextInput('Enter text...', (e) => Log.info(`Text input changed: ${e.target.value}`));
+uiManager.addSlider(0, 100, 1, 50, 'Slider', (value) => Log.info(`Slider value: ${value}`));
 
-// Set or get the value
-textInputElement.value = 'New value';
-```
+// Create a notification
+uiManager.createNotification('Notification Title', 'This is a notification message.');
 
-### Creating Tab Menus
-
-```javascript
-let tabs = uiManager.createTabMenu([
-    { title: 'Tab 1', content: '<p>This is the content of Tab 1</p>' },
-    { title: 'Tab 2', content: '<p>This is the content of Tab 2</p>' },
-    { title: 'Tab 3', content: '<p>This is the content of Tab 3</p>' }
-]);
-```
-
-### Showing Tab Content
-
-```javascript
-uiManager.showTabContent(0, tabs, contentContainer); // Index 0 is the first tab
-```
-
-## API
-
-### `createMenu(elementId, titleText)`
-
-Creates a new menu with the specified element ID and title text.
-
-- `elementId`: (String) The ID for the menu element.
-- `titleText`: (String) The title text for the menu.
-
-### `makeDraggable(element)`
-
-Makes the specified menu draggable.
-
-- `element`: (HTMLElement) The menu element to make draggable.
-
-### `addButton(buttonText, buttonAction)`
-
-Adds a button to the current menu.
-
-- `buttonText`: (String) The text to display on the button.
-- `buttonAction`: (Function) The action to perform when the button is clicked.
-
-### `addLabel(labelText)`
-
-Adds a label to the current menu.
-
-- `labelText`: (String) The text to display on the label.
-
-### `addTextInput(placeholderText, valueChangeAction)`
-
-Adds a text input field to the current menu.
-
-- `placeholderText`: (String) The placeholder text for the input field.
-- `valueChangeAction`: (Function) The action to perform when the value of the input field changes.
-
-Returns the created input element.
-
-### `createTabMenu(tabs)`
-
-Creates a tab menu with the specified tabs.
-
-- `tabs`: (Array) An array of objects, each containing a title and content for a tab.
-
-Returns the created tabs.
-
-### `showTabContent(index, tabs, contentContainer)`
-
-Shows the content of the tab at the specified index.
-
-- `index`: (Number) The index of the tab to show.
-- `tabs`: (Array) The array of tabs created with `createTabMenu`.
-- `contentContainer`: (HTMLElement) The container where the tab content will be displayed.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+// Create a tab menu
+const tabs = [
+    { title: 'Tab 1', content: 'Content for Tab 1' },
+    { title: 'Tab 2', content: 'Content for Tab 2' }
+];
+const tabMenu = uiManager.createTabMenu(tabs);
